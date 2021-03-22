@@ -4,7 +4,7 @@ import numpy as np
 
 from BillReader import BillReader
 from CurrencyRecognizer import CurrencyRecognizer
-from Summarizer import Summarizer
+from Summarizer import OurSummarizer
 from TextRecognizer import TextRecognizer
 from Bot import Bot
 from DetectObject import DetectObject
@@ -52,7 +52,7 @@ class Server():
         # self.currencyRecognizer.configure("D:\\TP_PROGS\\Projects\\TeProjSahara\\progs\\Sahara-System-For-Aiding-Visually-Impaired-master\\Sahara-System-For-Aiding-Visually-Impaired-master\\Server_side\\DataFiles\\yolov3.weights",\
         #      "D:\\TP_PROGS\\Projects\\TeProjSahara\\progs\\Sahara-System-For-Aiding-Visually-Impaired-master\\Sahara-System-For-Aiding-Visually-Impaired-master\\Server_side\\DataFiles\\yolov3-tiny.cfg", \
         #          ('10','20','50','100','200','500','2000'))
-        self.summarizer = Summarizer()
+        self.ourSummarizer = OurSummarizer()
         self.textRecognizer = TextRecognizer()
         self.bot = Bot()
         self.objectDet = DetectObject()
@@ -111,16 +111,17 @@ class Server():
             if intent=="CurrencyRecognition":
                 msg, _ = self.currencyRecognizer.readCurr(image)
             elif intent=="BillReading":
-                msg = self.billReader.readBill(image)
+                msg = self.billReader.readBill(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
             elif intent=="TextSummarization":
-                text = self.textRecognizer.ocr(image)
-                msg = self.summarizer.generateSummary(text)
+                text = self.textRecognizer.ocr(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+                print("TEXTTTTT", text)
+                msg = self.ourSummarizer.genSummary(text)
             elif intent=="BasicTextReading":
-                msg = self.textRecognizer.ocr(image)
+                msg = self.textRecognizer.ocr(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
             elif intent == "Object":
-                msg = self.objectDet.objDetect(image)
+                msg = self.objectDet.objDetect(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
             elif intent == "Mask":
-                msg = self.maskDet.masKDetect(image)
+                msg = self.maskDet.masKDetect(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
 
             elif intent=="TotalCash":
                 msg, temp = self.currencyRecognizer.readCurr(image)

@@ -87,7 +87,7 @@ public class CameraActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        SERVER_IP = "192.168.43.15";
+        SERVER_IP = "192.168.100.4";
         SERVER_PORT = 7100;
 
         connObj = new Communicate(SERVER_IP, SERVER_PORT);
@@ -106,7 +106,7 @@ public class CameraActivity extends AppCompatActivity {
                     }
                     else{
                         ttsStatus = "SUCCESS";
-                        tts.setSpeechRate((float)2.5);
+                        tts.setSpeechRate((float)1.5);
                     }
                 }
 
@@ -394,6 +394,33 @@ public class CameraActivity extends AppCompatActivity {
 
         }
         super.onPause();
+    }
+
+    @Override
+    public void onResume()
+    {
+
+        /* Disable TTS when your app is not in the foreground */
+
+        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR){
+                    int result = tts.setLanguage(Locale.ENGLISH);
+                    if (result  == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED){
+
+                        ttsStatus = "LANG_UNSUPPORTED";
+                    }
+                    else{
+                        ttsStatus = "SUCCESS";
+                        tts.setSpeechRate((float)1.5);
+                    }
+                }
+
+            }
+        });
+
+        super.onResume();
     }
 
     @Override

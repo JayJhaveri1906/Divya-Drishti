@@ -12,9 +12,12 @@ from collections import Counter
 class DetectObject():
     def __init__(self):
         print("init")
-        self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\modelStart"
-        self.GRAPH_NAME = "detect.tflite"
-        self.LABELMAP_NAME = "labelmap.txt"
+        # self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\modelStart"
+        self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\finalObjDet\\new\\new"
+        # self.GRAPH_NAME = "detect.tflite"
+        self.GRAPH_NAME = "ssd_mobilenet_v1_1_metadata_1.tflite"
+        # self.LABELMAP_NAME = "labelmap.txt"
+        self.LABELMAP_NAME = "label.txt"
         self.min_conf_threshold = 0.5
         # use_TPU = args.edgetpu
         self.listOfObjDetec = []
@@ -46,6 +49,10 @@ class DetectObject():
         self.width = self.input_details[0]['shape'][2]
 
     def objDetect(self, img):
+        cv2.imshow('Object detector', img)
+
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
         # clearing list of prev objs
         self.listOfObjDetec.clear()
         imH, imW, _ = img.shape

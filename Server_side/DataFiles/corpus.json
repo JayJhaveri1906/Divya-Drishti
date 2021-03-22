@@ -21,6 +21,7 @@
 	"coloured" : 1,
 	
 	"bill" : 2,
+	"bil" : 2,
 	"cheque" : 2,
 	"price" : 2,
 	"statement" : 2,
