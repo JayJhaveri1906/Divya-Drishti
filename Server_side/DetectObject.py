@@ -7,7 +7,7 @@ import glob
 import importlib.util
 from tflite_runtime.interpreter import Interpreter
 from collections import Counter
-
+import DetectObject2PenKeys
 
 class DetectObject():
     def __init__(self):
@@ -18,7 +18,7 @@ class DetectObject():
         self.GRAPH_NAME = "ssd_mobilenet_v1_1_metadata_1.tflite"
         # self.LABELMAP_NAME = "labelmap.txt"
         self.LABELMAP_NAME = "label.txt"
-        self.min_conf_threshold = 0.5
+        self.min_conf_threshold = 0.65
         # use_TPU = args.edgetpu
         self.listOfObjDetec = []
 
@@ -108,4 +108,4 @@ class DetectObject():
             # Press any key to continue to next image, or press 'q' to quit
             return strg
         else:
-            return "No Objects Detected"
+            return  DetectObject2PenKeys.detectPenKey(img)

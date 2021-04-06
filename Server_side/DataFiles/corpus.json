@@ -85,5 +85,9 @@
 	"objects":9,
 
 	"mask":10,
-	"face mask":10
+	"face mask":10,
+
+	"color":11,
+	"colour":11,
+	"rang":11	
 }

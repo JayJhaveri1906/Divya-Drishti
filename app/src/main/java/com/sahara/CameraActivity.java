@@ -87,7 +87,7 @@ public class CameraActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        SERVER_IP = "192.168.100.4";
+        SERVER_IP = "192.168.127.1";
         SERVER_PORT = 7100;
 
         connObj = new Communicate(SERVER_IP, SERVER_PORT);

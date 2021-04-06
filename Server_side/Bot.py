@@ -7,7 +7,7 @@ class Bot:
 		with open("D:\\TP_PROGS\\Projects\\TeProjSahara\\progs\\Sahara-System-For-Aiding-Visually-Impaired-master\\Sahara-System-For-Aiding-Visually-Impaired-master\\Server_side\\DataFiles\\corpus.json", "r") as f:
 			self.corpus = json.loads(f.read())
 			""" word: intent"""
-			self.intents = ("TotalCash","ColorIdentification","BillReading","TextSummarization","BasicTextReading","DocumentClassification","CurrencyRecognition","Next","Stop","Object","Mask")
+			self.intents = ("TotalCash","ColorIdentification","BillReading","TextSummarization","BasicTextReading","DocumentClassification","CurrencyRecognition","Next","Stop","Object","Mask","Color")
 			self.numFeatures = len(self.intents)
 		
 		
