@@ -13,7 +13,8 @@ class DetectObject():
     def __init__(self):
         print("init")
         # self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\modelStart"
-        self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\finalObjDet\\new\\new"
+        # self.MODEL_NAME = "D:\\TP_PROGS\\Projects\\TeProjSahara\\model_objDetec\\finalObjDet\\new\\new"
+        self.MODEL_NAME = "models\\model_objDetec\\modelStart"
         # self.GRAPH_NAME = "detect.tflite"
         self.GRAPH_NAME = "ssd_mobilenet_v1_1_metadata_1.tflite"
         # self.LABELMAP_NAME = "labelmap.txt"
@@ -95,10 +96,10 @@ class DetectObject():
             print(self.listOfObjDetec)
             objDict = dict(Counter(self.listOfObjDetec))
             print(objDict)
-            strg = ""
+            strg = "Detected "
             for i in objDict:
                 print(i)
-                strg += "Detected " + str(objDict[i]) + " " + i + "\n"
+                strg += "" + str(objDict[i]) + " " + i + ", "
                 print(strg)
                 # All the results have been drawn on the image, now display the image
             cv2.imshow('Object detector', img)
@@ -108,4 +109,4 @@ class DetectObject():
             # Press any key to continue to next image, or press 'q' to quit
             return strg
         else:
-            return  DetectObject2PenKeys.detectPenKey(img)
+            return DetectObject2PenKeys.detectPenKey(img)

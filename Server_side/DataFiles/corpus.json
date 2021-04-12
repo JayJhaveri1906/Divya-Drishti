@@ -19,6 +19,7 @@
 	"colours" : 1,
 	"colored" : 1,
 	"coloured" : 1,
+	"rang": 1,
 	
 	"bill" : 2,
 	"bil" : 2,
@@ -77,17 +78,49 @@
 	"stop": 8,
 	"ruk jao": 8,
 	"done": 8,
+	"exit": 8,
+	"top": 8,
 
 	"object":9,
 	"object detection":9,
-	"detection":9,
 	"identify object":9,
 	"objects":9,
 
 	"mask":10,
 	"face mask":10,
+	"mass":10,
+	"ma":10,
+	"maa":10,
+	"maat": 10,
 
-	"color":11,
-	"colour":11,
-	"rang":11	
+	"card":11,
+	"business":11,
+	"business card":11,
+
+	"name":12,
+	"naam":12,
+	"naa":12,
+	
+	"address": 13,
+	"pata":13,
+	
+	"job":14,
+	"title":14,
+	"post":14,
+	"position":14,
+
+	"company":15,
+	
+	"website":16,
+	"web":16,
+	"site":16,
+
+	"email":17,
+	"mail":17,
+	"id":17,
+
+	"phone":18,
+	"number":18,
+
+	"full":19
 }

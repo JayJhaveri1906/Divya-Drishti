@@ -172,10 +172,10 @@ def detectPenKey(img):
         print(listOfObjDetec)
         objDict = dict(Counter(listOfObjDetec))
         print(objDict)
-        strg = ""
+        strg = "Detected "
         for i in objDict:
             print(i)
-            strg += "Detected " + str(objDict[i]) + " " + i + "\n"
+            strg += "" + str(objDict[i]) + " " + i + ", "
             print(strg)
             # All the results have been drawn on the image, now display the image
         cv2.imshow('Object detector', img)

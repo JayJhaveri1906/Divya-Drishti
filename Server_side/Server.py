@@ -6,13 +6,14 @@ import numpy as np
 # import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 
 from BillReader import BillReader
-from CurrencyRecognizer import CurrencyRecognizer
+from CurrencyRecognizer import CurrencyRecognizer #Change path in curreny.py
 from Summarizer import OurSummarizer
 from TextRecognizer import TextRecognizer
 from Bot import Bot
 from DetectObject import DetectObject
 from maskDetec import DetectMask
 from ColorRecognizer import ColorRecognizer
+from busiCardReader.card_recognition import CardRecog
 
 # first time use
 # import nltk
@@ -20,9 +21,12 @@ from ColorRecognizer import ColorRecognizer
 # nltk.download('punkt')
 global flag
 flag = 0
+global cardFlag
+cardFlag = 0
 
 totCash = []
-
+global fullDic
+fullDic = {}
 
 def totAmt():
     sum = 0
@@ -47,6 +51,11 @@ class Server:
         self.objectDet = DetectObject()
         self.maskDet = DetectMask()
         self.colorRec = ColorRecognizer()
+        self.cardRec = CardRecog()
+
+        # self.acceptedVars = ['Address', 'Email', 'Name', "Company", 'Job title', 'Phone', "Website"]
+        self.acceptedVars = {"Address":"addr" , "Email":"emails", "Name":"name", "Company":"company",
+                    "Job title":"job_title","Phone":"phones","Website": "website"}
 
     def startServer(self, portNo):
         self.host = socket.gethostname()
@@ -113,7 +122,9 @@ class Server:
         # cv2.destroyAllWindows()
         print(intent)
         global flag
-
+        global cardFlag
+        global fullDic
+        #CURRENY COUNTING
         if flag == 1:
             if intent == "Next":
                 msg, temp = self.currencyRecognizer.readCurr(image)
@@ -130,7 +141,26 @@ class Server:
                 msg = "Total amount is " + str(finalAmt)
                 flag = 0
             else:
-                msg = "I didn't catch what you said, Please repeat"
+                msg = "Not clear, Please repeat"
+
+        #BUSINESS READER
+        elif cardFlag == 1:
+            if intent in self.acceptedVars:
+                tmpAns = fullDic[self.acceptedVars[intent]]
+                if tmpAns == "N/A" or tmpAns == []:
+                    msg += "NO " + intent + " found"
+                else:
+                    msg += intent + " is " + str(tmpAns)
+            elif intent == "Full":
+                msg += self.cardRec.fullCardRecog(fullDic)
+            elif intent == "Stop":
+                print(fullDic)
+                fullDic.clear()
+                print(fullDic)
+                msg = "Restored Initial State"
+                cardFlag = 0
+            else:
+                msg = "Not clear, Please repeat"
 
         else:
             if intent == "CurrencyRecognition":
@@ -149,16 +179,26 @@ class Server:
                 msg = self.maskDet.masKDetect(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
             elif intent == "Color":
                 msg = self.colorRec.recColor(image)
+
+            elif intent == "BusiCard":
+                tmptxt = self.textRecognizer.ocr(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+                fullDic = self.cardRec.cardRecog(tmptxt)
+                if fullDic == {}:
+                    msg = "No card found"
+                else:
+                    msg = "Card found, What do you wanna know?"
+                    cardFlag = 1
+
             elif intent == "TotalCash":
                 msg, temp = self.currencyRecognizer.readCurr(image)
                 totCash.append(temp)
                 if temp == 0:
                     pass
                 else:
-                    msg = msg + " To continue totalling say the word NEXT. To get the final total say STOP"
+                    msg = msg + " To continue totalling say NEXT. To get the total say STOP"
                     flag = 1
             else:
-                msg = "I didnt catch what you said. Please repeat"
+                msg = "Not clear, Please repeat"
 
         print(msg)
         return msg

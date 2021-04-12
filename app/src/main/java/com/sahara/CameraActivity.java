@@ -1,6 +1,8 @@
 package com.sahara;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -28,6 +30,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
 import androidx.camera.core.FlashMode;
@@ -71,7 +74,12 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
 
+        if (firstStart) {
+            showStartDialog();
+        }
         getSupportActionBar().hide();
 
         mainLayout = findViewById(R.id.cameraFullScreen);
@@ -87,7 +95,7 @@ public class CameraActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
-        SERVER_IP = "192.168.127.1";
+        SERVER_IP = "192.168.100.7";
         SERVER_PORT = 7100;
 
         connObj = new Communicate(SERVER_IP, SERVER_PORT);
@@ -178,6 +186,25 @@ public class CameraActivity extends AppCompatActivity {
 
         });
 
+    }
+    private void showStartDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Disclaimer")
+                .setMessage("Welcome to Divya Drishti.You utilize the app using various voice commands.The voice commands specific for the task to be done are,Currency or Cash for Currency Detection,Total Cash for Currency Totaling,Mask for Whether a person is wearing a mask,Object for Detecting everyday life objects,Read Text for Reading all text available,Summary for reading and summarizing text,Bill for extracting total amount from a bill,Colour for Detecting colour around.")
+                .setPositiveButton("ACCEPT", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String text4 = "Welcome to our App Divya Drishti. You utilize the app using various voice commands.The voice commands specific for the task to be done are,Currency or Cash for Currency Detection,Total Cash for Currency Totaling,Mask for Whether a person is wearing a mask,Object for Detecting everyday life objects,Read Text for Reading all text available,Summary for reading and summarizing text,Bill for extracting total amount from a bill,Colour for Detecting colour around.";
+                        String text3 = "Welcome to our App Divya Drishti.\n"+ " You utilize the app using various voice commands.\n" + "The voice commands specific for the task to be done are.\n" + "Currency or Cash for Currency Detection.\n" + "Total Cash for Currency Totaling.\n" + "Mask for Whether a person is wearing a mask.\n" + "Object for Detecting everyday life objects.\n" + "Read Text for Reading all text available.\n" + "Summary for reading and summarizing text.\n" + "Bill for extracting total amount from a bill.\n" + "Colour for Detecting colour around.";
+                        tts.speak(text3, TextToSpeech.QUEUE_ADD, null, null);
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
     }
 
     /*-------------------------------------------------------------------------------------------------------------------------*/

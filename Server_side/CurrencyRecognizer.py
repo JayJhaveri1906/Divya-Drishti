@@ -28,12 +28,14 @@ class CurrencyRecognizer():
 	def readCurr(self, imge):
 		# loaded model
 		model_file = 'D:\\TP_PROGS\\Projects\\TeProjSahara\\model_currencyDetec\\model\\model-export_icn_tflite-Currency_detector_20210125103903-2021-01-25T08_23_23.101746Z_model.tflite'
+		# model_file = 'D:\\TP_PROGS\\Projects\\TeProjSahara\\progs\\Sahara-System-For-Aiding-Visually-Impaired-master\\Sahara-System-For-Aiding-Visually-Impaired-master\\Server_side\\models\\model_currencyDetec\\model\\model-export_icn_tflite-Currency_detector_20210125103903-2021-01-25T08_23_23.101746Z_model.tflite'
 		interpreter = tflite.Interpreter(
 			model_path=model_file, num_threads=None)
 		interpreter.allocate_tensors()
 
 		# loading labels
 		label_file = 'D:\\TP_PROGS\\Projects\\TeProjSahara\\model_currencyDetec\\model\\model-export_icn_tflite-Currency_detector_20210125103903-2021-01-25T08_23_23.101746Z_dict.txt'
+		# label_file = 'models\\model_currencyDetec\\model\\model-export_icn_tflite-Currency_detector_20210125103903-2021-01-25T08_23_23.101746Z_dict.txt'
 		# labels = load_labels(label_file)
 		with open(label_file, 'r') as f:
 			labels = [line.strip() for line in f.readlines()]
