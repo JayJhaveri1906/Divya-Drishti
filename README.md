@@ -1,2 +1,15 @@
-# Sahara-System-For-Aiding-Visually-Impaired
-The project entails a small, compact, internet-less, cost-efficient, portable device that interacts with an android application and collectively provides features that aid the visually impaired people in their daily chores. The features provided are currency identification along with counting, supermarket bill reading, basic text reading, text summarization to get an essence of a long text excerpt, business-card reading, color identification. The android application is merely used as an interface that works on voice and screen taps in its entirety. The processing part is carried out by the device which is a single-board computer (Raspberry Pi 4).
+# Divya-Drishti: An Independent Aid for the Visually Impaired
+The Objective of this system is to help/guide the
+visually challenged people with the help of a smart device using
+an Android Phone. This device will help the visually challenged
+person to get greater sense of awareness of surroundings
+around him/her and will also help him/her by protecting them
+against frauds. What makes this device innovative is that the
+device is completely Internet Free and also helps in effective
+communication with the help of Voice Commands as this is the
+only medium through which a visually challenged person can
+effectively communicate with an external device. Our device
+has successfully managed to implement multiple daily usage
+features like OCR, Bill Reading, Text Summarization, Mask
+Detection, Color Detection, Currency Detection in a single
+standalone portable system.
