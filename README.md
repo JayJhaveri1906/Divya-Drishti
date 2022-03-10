@@ -1,4 +1,5 @@
 # Divya-Drishti: An Independent Aid for the Visually Impaired
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=lRjCKhczHtY)
 The Objective of this system is to help/guide the
 visually challenged people with the help of a smart device using
 an Android Phone. This device will help the visually challenged
