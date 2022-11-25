@@ -20,6 +20,13 @@ This device has successfully managed to implement multiple daily usage features 
 
 In a single standalone portable system.
 
+---
+We go in detail about out methodology in our [research paper](https://dx.doi.org/10.2139/ssrn.3867707)
+
+
+For a very detailed documentation of the project, please refer to this [word document](https://docs.google.com/document/d/1fwOqflFFXYsEYjk2FMS-T_B69LDfOEEvVPOvCZo3veM/edit?usp=sharing)
+
+
 Summarized video:\
 <a href="https://www.youtube.com/watch?v=lRjCKhczHtY
 " target="_blank"><img src="https://i.ytimg.com/vi/lRjCKhczHtY/maxresdefault.jpg" 
