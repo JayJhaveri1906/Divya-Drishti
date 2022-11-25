@@ -19,3 +19,8 @@ This device has successfully managed to implement multiple daily usage features 
 6. Buisness Card Reader 
 
 In a single standalone portable system.
+
+Summarized video:\
+<a href="https://www.youtube.com/watch?v=lRjCKhczHtY
+" target="_blank"><img src="https://i.ytimg.com/vi/lRjCKhczHtY/maxresdefault.jpg" 
+alt="Aatmanirbhar Samakraman: Auto File Sync App" width="426" height="240" border="10" /></a>
